@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.20)
+project(whitelist_system CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Drop nlohmann/json.hpp into cpp/vendor/ before building
+# https://github.com/nlohmann/json/releases/latest
+include_directories(vendor)
+
+add_library(wl_core STATIC
+    src/whitelist.cpp
+    src/hwid.cpp
+    src/process_guard.cpp
+    src/sig_verifier.cpp
+    src/addr_guard.cpp
+    src/obfuscator.cpp
+)
+
+target_include_directories(wl_core PUBLIC
